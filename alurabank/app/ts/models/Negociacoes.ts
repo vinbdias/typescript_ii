@@ -1,4 +1,5 @@
-import { Imprimivel, Negociacao } from './index';
+import { Imprimivel } from './Imprimivel';
+import { Negociacao} from './Negociacao';
 
 export class Negociacoes extends Imprimivel {
 

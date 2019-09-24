@@ -17,6 +17,5 @@
     "concurrently": "3.4.0",
     "lite-server": "2.3.0",
     "typescript": "2.3.2"
-  },
-  "dependencies": {}
+  }
 }

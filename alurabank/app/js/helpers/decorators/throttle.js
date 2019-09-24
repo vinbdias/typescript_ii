@@ -5,7 +5,7 @@ System.register([], function (exports_1, context_1) {
         return (target, propertyKey, descriptor) => {
             const metodoOriginal = descriptor.value;
             let timer = 0;
-            descriptor.value = (...args) => {
+            descriptor.value = function (...args) {
                 if (event)
                     event.preventDefault();
                 clearInterval(timer);
