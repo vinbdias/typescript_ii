@@ -1,7 +1,7 @@
 import { MensagemView, NegociacoesView } from '../views/index';
 import { Negociacao, Negociacoes } from '../models/index';
 import { domInject, throttle } from '../helpers/decorators/index';
-import { NegociacaoService } from '../services/index';
+import { NegociacaoService, ResponseHandler } from '../services/index';
 import { imprime } from '../helpers/index'
 
 export class NegociacaoController {
@@ -57,22 +57,29 @@ export class NegociacaoController {
     }
 
     @throttle()
-    importaDados() {
-        
-        this._service
-            .obterNegociacoes(res => {
+    async importaDados() {
 
-                if (res.ok)
-                    return res;
-                else
-                    throw new Error(res.statusText); 
-            })
-            .then(negociacoes => {
-                negociacoes.forEach((negociacao: Negociacao) =>
+        try {
+
+        const negociacoesParaImportar = await this._service.obterNegociacoes(ResponseHandler.isOk);
+
+            const negociacoesJaImportadas = this._negociacoes.paraArray();
+
+            negociacoesParaImportar
+                .filter(negociacao =>
+                    !negociacoesJaImportadas.some(jaImportada =>
+                        negociacao.ehIgual(jaImportada)))
+                .forEach(negociacao =>
                     this._negociacoes.adiciona(negociacao));
-                this._negociacoesView.update(this._negociacoes);
-            })
-            .catch(err => console.log(err));        
+
+            this._negociacoesView.update(this._negociacoes);  
+            this._mensagemView.update('Negociações importadas com sucesso!');          
+        }
+        catch(error) {
+
+            console.log(error);
+            this._mensagemView.update('Não foi possível importar as negociações.');
+        }   
     }
 }
 

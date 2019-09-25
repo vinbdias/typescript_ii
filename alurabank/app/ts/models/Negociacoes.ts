@@ -1,7 +1,7 @@
-import { Imprimivel } from './Imprimivel';
 import { Negociacao} from './Negociacao';
+import { MeuObjeto } from './MeuObjeto';
 
-export class Negociacoes extends Imprimivel {
+export class Negociacoes implements MeuObjeto {
 
     private _negociacoes: Negociacao[] = [];
 
@@ -18,5 +18,10 @@ export class Negociacoes extends Imprimivel {
     paraTexto(): string {
 
         return `${JSON.stringify(this._negociacoes)}`;
+    }
+
+    ehIgual(negociacoes: Negociacoes): boolean {
+
+        return JSON.stringify(this._negociacoes) === JSON.stringify(Negociacoes);
     }
 }

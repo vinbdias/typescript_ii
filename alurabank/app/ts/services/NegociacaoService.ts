@@ -1,4 +1,5 @@
 import { NegociacaoParcial, Negociacao } from '../models/index';
+import { ResponseHandler } from './ResponseHandler';
 
 export class NegociacaoService {
 
@@ -11,9 +12,4 @@ export class NegociacaoService {
                 dados.map(dado => new Negociacao(new Date(), dado.vezes, dado.montante)));
 
     }
-}
-
-export interface ResponseHandler {
-
-    (res: Response): Response
 }

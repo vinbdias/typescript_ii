@@ -1,4 +1,4 @@
-System.register(["./NegociacaoService"], function (exports_1, context_1) {
+System.register(["./NegociacaoService", "./ResponseHandler"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     function exportStar_1(m) {
@@ -12,6 +12,9 @@ System.register(["./NegociacaoService"], function (exports_1, context_1) {
         setters: [
             function (NegociacaoService_1_1) {
                 exportStar_1(NegociacaoService_1_1);
+            },
+            function (ResponseHandler_1_1) {
+                exportStar_1(ResponseHandler_1_1);
             }
         ],
         execute: function () {
